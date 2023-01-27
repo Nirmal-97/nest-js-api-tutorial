@@ -15,11 +15,14 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  email String
-  hash  String
+  email    String @unique
+  passcode String
 
   firstName String?
   lastName  String?
+  BookMark  BookMark[]
+
+  @@map("users")
 }
 
 model BookMark {
@@ -30,4 +33,9 @@ model BookMark {
   title       String?
   description String?
   link        String
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  @@map("bookMarks")
 }
