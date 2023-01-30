@@ -9,6 +9,7 @@ import {
 import { error } from 'console';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config/dist/config.service';
+import { retry } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -36,6 +37,7 @@ export class AuthService {
 
       // delete user.passcode;
       // return user;
+      return this.signtoken(user.id, user.email);
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
