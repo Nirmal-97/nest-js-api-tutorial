@@ -7,6 +7,7 @@ import { BookmarkModule } from './bookmark/bookmark.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { UserService } from './user/user.service';
+import { BookmarkService } from './bookmark/bookmark.service';
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import { UserService } from './user/user.service';
     PrismaModule,
   ],
   controllers: [AppController],
-  providers: [AppService, UserService],
+  providers: [AppService, UserService, BookmarkService],
 })
 export class AppModule {}

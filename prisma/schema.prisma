@@ -20,7 +20,7 @@ model User {
 
   firstName String?
   lastName  String?
-  BookMark  BookMark[]
+  bookMarks BookMark[]
 
   @@map("users")
 }
@@ -30,7 +30,7 @@ model BookMark {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  title       String?
+  title       String
   description String?
   link        String
 
