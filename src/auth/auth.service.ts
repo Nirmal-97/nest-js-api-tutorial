@@ -16,13 +16,13 @@ export class AuthService {
   ) {}
 
   async signUp(dto: AuthDto) {
-    const passcode = await argon.hash(dto.passcode);
+    const hash = await argon.hash(dto.passcode);
 
     try {
       const user = await this.prisma.user.create({
         data: {
           email: dto.email,
-          passcode,
+          hash,
         },
         // select: {
         //   id: true,
@@ -40,8 +40,8 @@ export class AuthService {
           throw new ForbiddenException('Credentials Taken');
         }
       }
+      throw error;
     }
-    throw error;
   }
 
   async signIn(dto: AuthDto) {
@@ -54,13 +54,19 @@ export class AuthService {
     if (!user) {
       throw new ForbiddenException('Email Credentials Incorrect');
     }
-    const pwMatches = await argon.verify(user.passcode, dto.passcode);
+
+    const pwMatches = await argon.verify(user.hash, dto.passcode);
 
     if (!pwMatches) {
       throw new ForbiddenException('Passcode Credentials Incorrect');
     }
 
     return this.signtoken(user.id, user.email);
+    // const secretKey = await this.signtoken(user.id, user.email);
+    // return {
+    //   ...user,
+    //   access_token: secretKey,
+    // };
   }
 
   async signtoken(
@@ -83,4 +89,16 @@ export class AuthService {
       access_token: token,
     };
   }
+
+  // signtoken(id: number, email: string): Promise<string> {
+  //   const payload = {
+  //     sub: id,
+  //     email,
+  //   };
+  //   const secret = this.config.get('JWT_SECRET');
+  //   return this.jwt.signAsync(payload, {
+  //     expiresIn: '150m',
+  //     secret: secret,
+  //   });
+  // }
 }

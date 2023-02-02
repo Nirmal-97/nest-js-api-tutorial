@@ -1,4 +1,11 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Req,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto';
 
@@ -13,7 +20,11 @@ export class AuthController {
     // @Body('passcode') passcode: string,
     // @Body('passcode') passcode: ParseIntPipe, //To change the passcode string to int
   ) {
-    return this.authService.signUp(dto);
+    try {
+      return this.authService.signUp(dto);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   @HttpCode(HttpStatus.OK)

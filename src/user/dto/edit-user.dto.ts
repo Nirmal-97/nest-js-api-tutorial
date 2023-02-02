@@ -1,15 +1,15 @@
-import { IsEmail, IsOptional } from 'class-validator';
+import { IsEmail, IsOptional, IsString } from 'class-validator';
 
 export class EditUserDto {
   @IsEmail()
   @IsOptional()
   email?: string;
 
-  @IsEmail()
+  @IsString()
   @IsOptional()
   firstName?: string;
 
-  @IsEmail()
+  @IsString()
   @IsOptional()
   lastName?: string;
 }

@@ -7,21 +7,22 @@ import {
   HttpCode,
   Param,
   Patch,
-  Post,
   ParseIntPipe,
   HttpStatus,
+  Post,
 } from '@nestjs/common';
-import { GetUser } from 'src/auth/decorator';
-import { JwtGuard } from 'src/auth/guard';
+import { GetUser } from '../auth/decorator';
+import { JwtGuard } from '../auth/guard';
 import { BookmarkService } from './bookmark.service';
 import { CreateBookMarkDto, EditBookMarkDto } from './dto';
 @UseGuards(JwtGuard)
 @Controller('bookmarks')
 export class BookmarkController {
   constructor(private bookmarkService: BookmarkService) {}
+
   @Get()
   getBookmarks(@GetUser('id') userId: number) {
-    console.log('ssssssssssssss', userId);
+    console.log('UserId console', userId);
     return this.bookmarkService.getBookmarks(userId);
   }
 

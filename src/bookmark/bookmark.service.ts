@@ -1,5 +1,5 @@
 import { Injectable, ForbiddenException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateBookMarkDto, EditBookMarkDto } from './dto';
 
 @Injectable()
@@ -7,7 +7,7 @@ export class BookmarkService {
   constructor(private prisma: PrismaService) {}
 
   async getBookmarks(userId: number) {
-    console.log('dssssssssssss');
+    console.log('Get Bookmarks Console');
 
     return await this.prisma.bookMark.findMany({
       where: {

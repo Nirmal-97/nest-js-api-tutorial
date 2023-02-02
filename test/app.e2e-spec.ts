@@ -128,28 +128,28 @@ describe('App e2e', () => {
       });
     });
 
-    // describe('Edit User', () => {
-    //   it('should edit the user', () => {
-    //     const dto: EditUserDto = {
-    //       firstName: 'Nirmal',
-    //       email: 'nirmal@gmail.com',
-    //     };
-    //     return (
-    //       pactum
-    //         .spec()
-    //         .patch('/users')
-    //         .withHeaders({
-    //           Authorization: 'Bearer $S{userAt}',
-    //         })
-    //         .withBody(dto)
-    //         .expectStatus(200)
-    //         // .expectStatus(200)
-    //         .inspect()
-    //         .expectBodyContains(dto.firstName)
-    //         .expectBodyContains(dto.email)
-    //     );
-    //   });
-    // });
+    describe('Edit User', () => {
+      it('should edit the user', () => {
+        const dto: EditUserDto = {
+          firstName: 'Nirmal',
+          email: 'nirmal@gmail.com',
+        };
+        return (
+          pactum
+            .spec()
+            .patch('/users')
+            .withHeaders({
+              Authorization: 'Bearer $S{userAt}',
+            })
+            .withBody(dto)
+            .expectStatus(200)
+            // .expectStatus(200)
+            .inspect()
+            .expectBodyContains(dto.firstName)
+            .expectBodyContains(dto.email)
+        );
+      });
+    });
   });
 
   describe('Bookmark', () => {
