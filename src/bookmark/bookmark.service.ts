@@ -63,13 +63,16 @@ export class BookmarkService {
         id: bookmarkId,
       },
     });
-    if (!bookMark || bookMark.userId !== userId)
+
+    if (!bookMark || bookMark.userId !== userId) {
       throw new ForbiddenException('Access to resource denied');
+    }
 
     await this.prisma.bookMark.delete({
       where: {
         id: bookmarkId,
       },
     });
+    return 'Bookmark Deleted';
   }
 }

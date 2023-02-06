@@ -128,7 +128,7 @@ describe('App e2e', () => {
       });
     });
 
-    describe('Edit User', () => {
+    describe('Edit the User', () => {
       it('should edit the user', () => {
         const dto: EditUserDto = {
           firstName: 'Nirmal',
@@ -137,13 +137,13 @@ describe('App e2e', () => {
         return (
           pactum
             .spec()
-            .patch('/users')
+            .patch('/users/edit')
             .withHeaders({
               Authorization: 'Bearer $S{userAt}',
             })
             .withBody(dto)
             .expectStatus(200)
-            // .expectStatus(200)
+            // .expectStatus(400)
             .inspect()
             .expectBodyContains(dto.firstName)
             .expectBodyContains(dto.email)
