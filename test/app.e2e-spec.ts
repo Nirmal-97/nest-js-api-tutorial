@@ -115,7 +115,7 @@ describe('App e2e', () => {
     });
   });
 
-  describe('User', () => {
+  describe('Users', () => {
     describe('Get Me', () => {
       it('should get current user', () => {
         return pactum
